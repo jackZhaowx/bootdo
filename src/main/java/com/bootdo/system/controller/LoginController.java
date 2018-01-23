@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -49,10 +50,10 @@ public class LoginController extends BaseController {
 			if(fileService.isExist(fileDO.getUrl())){
 				model.addAttribute("picUrl",fileDO.getUrl());
 			}else {
-				model.addAttribute("picUrl","/img/photo_s.jpg");
+				model.addAttribute("picUrl","http://qcst-1251009399.cossh.myqcloud.com/picture/20180123/da0af43f-7138-4c5e-8470-6f5a732208fb.jpg");
 			}
 		}else {
-			model.addAttribute("picUrl","/img/photo_s.jpg");
+			model.addAttribute("picUrl","http://qcst-1251009399.cossh.myqcloud.com/picture/20180123/da0af43f-7138-4c5e-8470-6f5a732208fb.jpg");
 		}
 		model.addAttribute("username", getUser().getUsername());
 		return "index_v1";
@@ -87,6 +88,11 @@ public class LoginController extends BaseController {
 	@GetMapping("/main")
 	String main() {
 		return "main";
+	}
+
+	@RequestMapping("/test")
+	String test(){
+		return "test";
 	}
 
 	@GetMapping("/403")

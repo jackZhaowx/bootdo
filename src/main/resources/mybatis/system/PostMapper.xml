@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.system.dao.PostDao">
+
+	<select id="get" resultType="com.bootdo.system.domain.PostDO">
+		select `id`,`poster_id`,`create_time`,`content`,`root_post_id`,`repost_id`,`status`,`stick_flag`,`reading_quantity`,`category`,`link`,`coverimg`,`group_id`,`view_id`,`city_name`,`view_name`,`infoid`,`playtime`,`views`,`english_content`,`unique_id`,`source_type`,`live_code`,`push_flow`,`pull_flow`,`tag`,`score`,`update_time`,`source`,`activity_id` from post where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.system.domain.PostDOInfo">
+		select a.`id`,a.`create_time`,a.`content`,a.`status`,a.`category`,a.`stick_flag`,a.`link`,a.`coverimg`,a.`views`,`source_type`,a.`update_time`,b.`name`,c.nickname as authorName from post as  a left join media_level as b on a.source_type=b.id left join user c on a.poster_id=c.id
+        <where>
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="posterId != null and posterId != ''"> and poster_id = #{posterId} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="content != null and content != ''"> and content = #{content} </if>
+		  		  <if test="rootPostId != null and rootPostId != ''"> and root_post_id = #{rootPostId} </if>
+		  		  <if test="repostId != null and repostId != ''"> and repost_id = #{repostId} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="stickFlag != null and stickFlag != ''"> and stick_flag = #{stickFlag} </if>
+		  		  <if test="readingQuantity != null and readingQuantity != ''"> and reading_quantity = #{readingQuantity} </if>
+		  		  <if test="category != null and category != ''"> and category = #{category} </if>
+		  		  <if test="link != null and link != ''"> and link = #{link} </if>
+		  		  <if test="coverimg != null and coverimg != ''"> and coverimg = #{coverimg} </if>
+		  		  <if test="groupId != null and groupId != ''"> and group_id = #{groupId} </if>
+		  		  <if test="viewId != null and viewId != ''"> and view_id = #{viewId} </if>
+		  		  <if test="cityName != null and cityName != ''"> and city_name = #{cityName} </if>
+		  		  <if test="viewName != null and viewName != ''"> and view_name = #{viewName} </if>
+		  		  <if test="infoid != null and infoid != ''"> and infoid = #{infoid} </if>
+		  		  <if test="playtime != null and playtime != ''"> and playtime = #{playtime} </if>
+		  		  <if test="views != null and views != ''"> and views = #{views} </if>
+		  		  <if test="englishContent != null and englishContent != ''"> and english_content = #{englishContent} </if>
+		  		  <if test="uniqueId != null and uniqueId != ''"> and unique_id = #{uniqueId} </if>
+		  		  <if test="sourceType != null and sourceType != ''"> and source_type = #{sourceType} </if>
+		  		  <if test="liveCode != null and liveCode != ''"> and live_code = #{liveCode} </if>
+		  		  <if test="pushFlow != null and pushFlow != ''"> and push_flow = #{pushFlow} </if>
+		  		  <if test="pullFlow != null and pullFlow != ''"> and pull_flow = #{pullFlow} </if>
+		  		  <if test="tag != null and tag != ''"> and tag = #{tag} </if>
+		  		  <if test="score != null and score != ''"> and score = #{score} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="source != null and source != ''"> and source = #{source} </if>
+		  		  <if test="activityId != null and activityId != ''"> and activity_id = #{activityId} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from post
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="posterId != null and posterId != ''"> and poster_id = #{posterId} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="content != null and content != ''"> and content = #{content} </if>
+		  		  <if test="rootPostId != null and rootPostId != ''"> and root_post_id = #{rootPostId} </if>
+		  		  <if test="repostId != null and repostId != ''"> and repost_id = #{repostId} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="stickFlag != null and stickFlag != ''"> and stick_flag = #{stickFlag} </if>
+		  		  <if test="readingQuantity != null and readingQuantity != ''"> and reading_quantity = #{readingQuantity} </if>
+		  		  <if test="category != null and category != ''"> and category = #{category} </if>
+		  		  <if test="link != null and link != ''"> and link = #{link} </if>
+		  		  <if test="coverimg != null and coverimg != ''"> and coverimg = #{coverimg} </if>
+		  		  <if test="groupId != null and groupId != ''"> and group_id = #{groupId} </if>
+		  		  <if test="viewId != null and viewId != ''"> and view_id = #{viewId} </if>
+		  		  <if test="cityName != null and cityName != ''"> and city_name = #{cityName} </if>
+		  		  <if test="viewName != null and viewName != ''"> and view_name = #{viewName} </if>
+		  		  <if test="infoid != null and infoid != ''"> and infoid = #{infoid} </if>
+		  		  <if test="playtime != null and playtime != ''"> and playtime = #{playtime} </if>
+		  		  <if test="views != null and views != ''"> and views = #{views} </if>
+		  		  <if test="englishContent != null and englishContent != ''"> and english_content = #{englishContent} </if>
+		  		  <if test="uniqueId != null and uniqueId != ''"> and unique_id = #{uniqueId} </if>
+		  		  <if test="sourceType != null and sourceType != ''"> and source_type = #{sourceType} </if>
+		  		  <if test="liveCode != null and liveCode != ''"> and live_code = #{liveCode} </if>
+		  		  <if test="pushFlow != null and pushFlow != ''"> and push_flow = #{pushFlow} </if>
+		  		  <if test="pullFlow != null and pullFlow != ''"> and pull_flow = #{pullFlow} </if>
+		  		  <if test="tag != null and tag != ''"> and tag = #{tag} </if>
+		  		  <if test="score != null and score != ''"> and score = #{score} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="source != null and source != ''"> and source = #{source} </if>
+		  		  <if test="activityId != null and activityId != ''"> and activity_id = #{activityId} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.system.domain.PostDO" useGeneratedKeys="true" keyProperty="id">
+		insert into post
+		(
+			`poster_id`, 
+			`create_time`, 
+			`content`, 
+			`root_post_id`, 
+			`repost_id`, 
+			`status`, 
+			`stick_flag`, 
+			`reading_quantity`, 
+			`category`, 
+			`link`, 
+			`coverimg`, 
+			`group_id`, 
+			`view_id`, 
+			`city_name`, 
+			`view_name`, 
+			`infoid`, 
+			`playtime`, 
+			`views`, 
+			`english_content`, 
+			`unique_id`, 
+			`source_type`, 
+			`live_code`, 
+			`push_flow`, 
+			`pull_flow`, 
+			`tag`, 
+			`score`, 
+			`update_time`, 
+			`source`, 
+			`activity_id`
+		)
+		values
+		(
+			#{posterId}, 
+			#{createTime}, 
+			#{content}, 
+			#{rootPostId}, 
+			#{repostId}, 
+			#{status}, 
+			#{stickFlag}, 
+			#{readingQuantity}, 
+			#{category}, 
+			#{link}, 
+			#{coverimg}, 
+			#{groupId}, 
+			#{viewId}, 
+			#{cityName}, 
+			#{viewName}, 
+			#{infoid}, 
+			#{playtime}, 
+			#{views}, 
+			#{englishContent}, 
+			#{uniqueId}, 
+			#{sourceType}, 
+			#{liveCode}, 
+			#{pushFlow}, 
+			#{pullFlow}, 
+			#{tag}, 
+			#{score}, 
+			#{updateTime}, 
+			#{source}, 
+			#{activityId}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.system.domain.PostDO">
+		update post 
+		<set>
+			<if test="posterId != null">`poster_id` = #{posterId}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="rootPostId != null">`root_post_id` = #{rootPostId}, </if>
+			<if test="repostId != null">`repost_id` = #{repostId}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="stickFlag != null">`stick_flag` = #{stickFlag}, </if>
+			<if test="readingQuantity != null">`reading_quantity` = #{readingQuantity}, </if>
+			<if test="category != null">`category` = #{category}, </if>
+			<if test="link != null">`link` = #{link}, </if>
+			<if test="coverimg != null">`coverimg` = #{coverimg}, </if>
+			<if test="groupId != null">`group_id` = #{groupId}, </if>
+			<if test="viewId != null">`view_id` = #{viewId}, </if>
+			<if test="cityName != null">`city_name` = #{cityName}, </if>
+			<if test="viewName != null">`view_name` = #{viewName}, </if>
+			<if test="infoid != null">`infoid` = #{infoid}, </if>
+			<if test="playtime != null">`playtime` = #{playtime}, </if>
+			<if test="views != null">`views` = #{views}, </if>
+			<if test="englishContent != null">`english_content` = #{englishContent}, </if>
+			<if test="uniqueId != null">`unique_id` = #{uniqueId}, </if>
+			<if test="sourceType != null">`source_type` = #{sourceType}, </if>
+			<if test="liveCode != null">`live_code` = #{liveCode}, </if>
+			<if test="pushFlow != null">`push_flow` = #{pushFlow}, </if>
+			<if test="pullFlow != null">`pull_flow` = #{pullFlow}, </if>
+			<if test="tag != null">`tag` = #{tag}, </if>
+			<if test="score != null">`score` = #{score}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="source != null">`source` = #{source}, </if>
+			<if test="activityId != null">`activity_id` = #{activityId}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from post where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from post where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

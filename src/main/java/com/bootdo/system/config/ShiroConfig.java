@@ -37,6 +37,7 @@ public class ShiroConfig {
         userRealm.setCacheManager(cacheManager);
         return userRealm;
     }
+
     @Bean
     SessionDAO sessionDAO() {
         MemorySessionDAO sessionDAO = new MemorySessionDAO();
@@ -82,6 +83,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/blog", "anon");
         filterChainDefinitionMap.put("/blog/open/**", "anon");
+        filterChainDefinitionMap.put("/post", "anon");
         filterChainDefinitionMap.put("/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

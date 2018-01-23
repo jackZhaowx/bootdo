@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">发帖者主键id：</label>
+								<div class="col-sm-8">
+									<input id="posterId" name="posterId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建时间：</label>
+								<div class="col-sm-8">
+									<input id="createTime" name="createTime" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">帖子内容：</label>
+								<div class="col-sm-8">
+									<input id="content" name="content" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">转发的源头贴的主键id：</label>
+								<div class="col-sm-8">
+									<input id="rootPostId" name="rootPostId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">被转发的帖子的主键id：</label>
+								<div class="col-sm-8">
+									<input id="repostId" name="repostId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">0=deleted, 1=normal：</label>
+								<div class="col-sm-8">
+									<input id="status" name="status" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">是否置顶(0否1是)：</label>
+								<div class="col-sm-8">
+									<input id="stickFlag" name="stickFlag" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">增加帖子阅读量：</label>
+								<div class="col-sm-8">
+									<input id="readingQuantity" name="readingQuantity" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">1，图片动态；2，视频动态；3，直播动态；4，广告；5直播回放：</label>
+								<div class="col-sm-8">
+									<input id="category" name="category" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">增加直播视频链接：</label>
+								<div class="col-sm-8">
+									<input id="link" name="link" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">封面：</label>
+								<div class="col-sm-8">
+									<input id="coverimg" name="coverimg" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">群组id：</label>
+								<div class="col-sm-8">
+									<input id="groupId" name="groupId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">风景表主键：</label>
+								<div class="col-sm-8">
+									<input id="viewId" name="viewId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">景点所在的位置：</label>
+								<div class="col-sm-8">
+									<input id="cityName" name="cityName" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">景点name：</label>
+								<div class="col-sm-8">
+									<input id="viewName" name="viewName" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">帖子 发直播信息 ：</label>
+								<div class="col-sm-8">
+									<input id="infoid" name="infoid" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="playtime" name="playtime" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">帖子浏览量：</label>
+								<div class="col-sm-8">
+									<input id="views" name="views" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="englishContent" name="englishContent" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">帖子的唯一标志：</label>
+								<div class="col-sm-8">
+									<input id="uniqueId" name="uniqueId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">帖子的分类：</label>
+								<div class="col-sm-8">
+									<input id="sourceType" name="sourceType" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">直播房间号：</label>
+								<div class="col-sm-8">
+									<input id="liveCode" name="liveCode" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">推流地址：</label>
+								<div class="col-sm-8">
+									<input id="pushFlow" name="pushFlow" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">拉流地址：</label>
+								<div class="col-sm-8">
+									<input id="pullFlow" name="pullFlow" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">帖子标签：</label>
+								<div class="col-sm-8">
+									<input id="tag" name="tag" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">帖子的优先级：</label>
+								<div class="col-sm-8">
+									<input id="score" name="score" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">帖子的更新时间：</label>
+								<div class="col-sm-8">
+									<input id="updateTime" name="updateTime" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">帖子来源关联（media_soure表)：</label>
+								<div class="col-sm-8">
+									<input id="source" name="source" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">线上活动主键id：</label>
+								<div class="col-sm-8">
+									<input id="activityId" name="activityId" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/system/post/add.js">
+	</script>
+</body>
+</html>

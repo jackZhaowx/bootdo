@@ -26,13 +26,15 @@ import java.util.zip.ZipOutputStream;
  */
 @SuppressWarnings("AlibabaRemoveCommentedCode")
 public class GenUtils {
-
-
+    /**
+     * 获取模板
+     *
+     * @return
+     */
     public static List<String> getTemplates() {
         List<String> templates = new ArrayList<String>();
         templates.add("templates/common/generator/domain.java.vm");
         templates.add("templates/common/generator/Dao.java.vm");
-        //templates.add("templates/common/generator/Mapper.java.vm");
         templates.add("templates/common/generator/Mapper.xml.vm");
         templates.add("templates/common/generator/Service.java.vm");
         templates.add("templates/common/generator/ServiceImpl.java.vm");
@@ -43,15 +45,16 @@ public class GenUtils {
         templates.add("templates/common/generator/list.js.vm");
         templates.add("templates/common/generator/add.js.vm");
         templates.add("templates/common/generator/edit.js.vm");
-        //templates.add("templates/common/generator/menu.sql.vm");
         return templates;
     }
 
     /**
      * 生成代码
+     *
+     * @param table
+     * @param columns
+     * @param zip
      */
-
-
     public static void generatorCode(Map<String, String> table,
                                      List<Map<String, String>> columns, ZipOutputStream zip) {
         //配置信息
@@ -175,7 +178,6 @@ public class GenUtils {
      */
     public static String getFileName(String template, String classname, String className, String packageName) {
         String packagePath = "main" + File.separator + "java" + File.separator;
-        //String modulesname=config.getString("packageName");
         if (StringUtils.isNotBlank(packageName)) {
             packagePath += packageName.replace(".", File.separator) + File.separator;
         }
@@ -188,9 +190,6 @@ public class GenUtils {
             return packagePath + "dao" + File.separator + className + "Dao.java";
         }
 
-//		if(template.contains("Mapper.java.vm")){
-//			return packagePath + "dao" + File.separator + className + "Mapper.java";
-//		}
 
         if (template.contains("Service.java.vm")) {
             return packagePath + "service" + File.separator + className + "Service.java";
@@ -211,7 +210,6 @@ public class GenUtils {
         if (template.contains("list.html.vm")) {
             return "main" + File.separator + "resources" + File.separator + "templates" + File.separator
                     + packageName + File.separator + classname + File.separator + classname + ".html";
-            //				+ "modules" + File.separator + "generator" + File.separator + className.toLowerCase() + ".html";
         }
         if (template.contains("add.html.vm")) {
             return "main" + File.separator + "resources" + File.separator + "templates" + File.separator
@@ -225,7 +223,6 @@ public class GenUtils {
         if (template.contains("list.js.vm")) {
             return "main" + File.separator + "resources" + File.separator + "static" + File.separator + "js" + File.separator
                     + "appjs" + File.separator + packageName + File.separator + classname + File.separator + classname + ".js";
-            //		+ "modules" + File.separator + "generator" + File.separator + className.toLowerCase() + ".js";
         }
         if (template.contains("add.js.vm")) {
             return "main" + File.separator + "resources" + File.separator + "static" + File.separator + "js" + File.separator
@@ -235,10 +232,6 @@ public class GenUtils {
             return "main" + File.separator + "resources" + File.separator + "static" + File.separator + "js" + File.separator
                     + "appjs" + File.separator + packageName + File.separator + classname + File.separator + "edit.js";
         }
-
-//		if(template.contains("menu.sql.vm")){
-//			return className.toLowerCase() + "_menu.sql";
-//		}
 
         return null;
     }
